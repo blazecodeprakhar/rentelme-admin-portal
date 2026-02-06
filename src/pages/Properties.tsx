@@ -121,11 +121,11 @@ export default function Properties() {
             if (property && property.images && property.images.length > 0) {
                 const deletionPromises = property.images.map(async (url: string) => {
                     try {
-                        // Extract ID from either http://localhost:3000/image/ID or direct link
+                        // Extract ID from either https://rentelme-server.onrender.com/image/ID or direct link
                         // If using proxy format:
                         if (url.includes('/image/')) {
                             const fileId = url.split('/image/')[1];
-                            await fetch(`http://localhost:3000/image/${fileId}`, { method: 'DELETE' });
+                            await fetch(`https://rentelme-server.onrender.com/image/${fileId}`, { method: 'DELETE' });
                         }
                     } catch (e) {
                         console.error("Failed to delete image:", url);

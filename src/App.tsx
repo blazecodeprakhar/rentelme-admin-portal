@@ -27,26 +27,30 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
+import { ServerAwake } from "@/components/ServerAwake";
+
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
+        <ServerAwake>
+          <Routes>
+            <Route path="/login" element={<Login />} />
 
-          <Route path="/" element={
-            <ProtectedRoute>
-              <AdminLayout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="properties" element={<Properties />} />
-            <Route path="users" element={<Users />} />
-            <Route path="advertisements" element={<Advertisements />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Routes>
+            <Route path="/" element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<Navigate to="/dashboard" replace />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="properties" element={<Properties />} />
+              <Route path="users" element={<Users />} />
+              <Route path="advertisements" element={<Advertisements />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </ServerAwake>
       </BrowserRouter>
       <Toaster position="top-right" richColors closeButton />
     </AuthProvider>

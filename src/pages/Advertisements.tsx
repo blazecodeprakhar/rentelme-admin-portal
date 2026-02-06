@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
 import { collection, query, where, getDocs, updateDoc, doc, orderBy, deleteDoc, deleteField } from "firebase/firestore";
+import { fixImageUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -501,7 +502,7 @@ export default function Advertisements() {
                             {activeAds.map(ad => (
                                 <Card key={ad.id} className="overflow-hidden border-emerald-200">
                                     <div className="h-40 w-full bg-gray-100 relative">
-                                        <img src={ad.image} alt={ad.title} className="w-full h-full object-cover" />
+                                        <img src={fixImageUrl(ad.image)} alt={ad.title} className="w-full h-full object-cover" />
                                         <Badge className="absolute top-2 right-2 bg-emerald-500">
                                             <TrendingUp className="w-3 h-3 mr-1" />
                                             Live
@@ -554,7 +555,7 @@ export default function Advertisements() {
                             {expiredAds.map(ad => (
                                 <Card key={ad.id} className="overflow-hidden border-red-200 opacity-75">
                                     <div className="h-40 w-full bg-gray-100 relative">
-                                        <img src={ad.image} alt={ad.title} className="w-full h-full object-cover grayscale" />
+                                        <img src={fixImageUrl(ad.image)} alt={ad.title} className="w-full h-full object-cover grayscale" />
                                         <Badge className="absolute top-2 right-2 bg-red-500">Expired</Badge>
                                     </div>
                                     <CardContent className="p-4">

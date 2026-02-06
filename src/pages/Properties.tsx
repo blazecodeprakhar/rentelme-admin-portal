@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { CheckCircle2, XCircle, Search, MapPin, Home, RefreshCcw, Power, Eye, ImageIcon, Phone, Trash2, Repeat2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
+import { fixImageUrl } from "@/lib/utils";
 import { collection, getDocs, updateDoc, doc, query, deleteDoc } from "firebase/firestore";
 import { toast } from "sonner";
 import {
@@ -395,7 +396,7 @@ export default function Properties() {
                                                 className="aspect-video bg-muted rounded-md overflow-hidden relative cursor-pointer hover:ring-2 hover:ring-primary transition-all"
                                                 onClick={() => setSelectedImage(img)}
                                             >
-                                                <img src={img} alt={`Property ${index + 1}`} className="w-full h-full object-cover" />
+                                                <img src={fixImageUrl(img)} alt={`Property ${index + 1}`} className="w-full h-full object-cover" />
                                                 <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors flex items-center justify-center">
                                                     <Eye className="w-6 h-6 text-white opacity-0 hover:opacity-100 drop-shadow-md" />
                                                 </div>
@@ -404,7 +405,7 @@ export default function Properties() {
                                     ) : (
                                         // Fallback if only main image exists (old data)
                                         <div className="aspect-video bg-muted rounded-md overflow-hidden relative col-span-2 md:col-span-3">
-                                            <img src={detailsDialog.property.image} alt="Main" className="w-full h-full object-cover" />
+                                            <img src={fixImageUrl(detailsDialog.property.image)} alt="Main" className="w-full h-full object-cover" />
                                         </div>
                                     )}
                                 </div>
@@ -516,7 +517,7 @@ export default function Properties() {
                     </DialogHeader>
                     <div className="relative w-full h-[80vh] flex items-center justify-center">
                         <img
-                            src={selectedImage || ""}
+                            src={fixImageUrl(selectedImage) || ""}
                             alt="Full Screen View"
                             className="max-w-full max-h-full object-contain rounded-sm"
                         />

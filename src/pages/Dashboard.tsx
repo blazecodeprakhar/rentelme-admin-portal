@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Activity, Building2, Users, CheckCircle2, AlertCircle, Home, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
+import { fixImageUrl } from "@/lib/utils";
 import { collection, getDocs, query, where, limit, getCountFromServer } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -144,7 +145,7 @@ export default function Dashboard() {
                             {recentListings.length > 0 ? recentListings.map((property) => (
                                 <div key={property.id} className="flex items-center gap-4 rounded-lg border p-3">
                                     <div className="h-10 w-10 bg-muted rounded-md flex px-2 py-1 items-center justify-center text-xs text-muted-foreground overflow-hidden">
-                                        {property.image ? <img src={property.image} className="w-full h-full object-cover" /> : <Home className="h-5 w-5 opacity-20" />}
+                                        {property.image ? <img src={fixImageUrl(property.image)} className="w-full h-full object-cover" /> : <Home className="h-5 w-5 opacity-20" />}
                                     </div>
                                     <div className="grid gap-1">
                                         <p className="text-sm font-medium leading-none line-clamp-1">{property.title || "Untitled Property"}</p>

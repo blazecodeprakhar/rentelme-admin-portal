@@ -9,6 +9,11 @@ interface ImageWithSkeletonProps extends React.ImgHTMLAttributes<HTMLImageElemen
 export const ImageWithSkeleton = ({ containerClassName = "", className = "", src, alt, children, ...props }: ImageWithSkeletonProps) => {
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fix Legacy Localhost URLs to Production Render URL
+    const processedSrc = src?.includes("localhost:3000")
+        ? src.replace("http://localhost:3000", "https://rentelme-server.onrender.com")
+        : src;
+
     return (
         <div className={`relative overflow-hidden bg-muted ${containerClassName}`}>
             {isLoading && (
@@ -17,7 +22,7 @@ export const ImageWithSkeleton = ({ containerClassName = "", className = "", src
                 </div>
             )}
             <img
-                src={src}
+                src={processedSrc}
                 alt={alt}
                 className={`${className} transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                 onLoad={() => setIsLoading(false)}
